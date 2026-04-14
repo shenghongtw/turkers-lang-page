@@ -81,10 +81,10 @@
       const cards = document.querySelectorAll(".card");
 
       cards.forEach((card) => {
-        card.addEventListener("click", () => {
-          if (!sales) {
-            return;
-          }
+        card.addEventListener("click", (e) => {
+          if (!sales) return;
+
+          e.preventDefault(); // 🔥 阻止立即跳轉
 
           const country = card.dataset.country;
 
@@ -92,17 +92,18 @@
             "https://script.google.com/macros/s/AKfycbzJEVcn3WLKLir6h1uN6hgPfTta85E6qBfXI367p5jEVVE5mIzZFffj8Wsv5BXfrVhrTQ/exec",
             {
               method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
+              mode: "no-cors", // 🔥 解決 CORS
               body: JSON.stringify({
                 sales: sales,
                 country: country,
               }),
             }
-          ).catch(() => {
-            // Do not block navigation if the sheet logging request fails.
-          });
+          );
+
+          // 🔥 延遲跳轉（讓 request 有時間送出）
+          setTimeout(() => {
+            window.open(card.href, "_blank");
+          }, 300);
         });
       });
     </script>
