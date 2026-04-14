@@ -21,6 +21,7 @@
       <section class="grid" aria-label="LINE 官方帳號入口">
         <a
           class="card"
+          data-country="vietnam"
           href="https://line.me/R/ti/p/@046hgxyf?oat_content=url&ts=03090234"
           target="_blank"
           rel="noopener noreferrer"
@@ -31,6 +32,7 @@
 
         <a
           class="card"
+          data-country="indonesia"
           href="https://line.me/R/ti/p/@913dqslp?oat_content=url&ts=03090235"
           target="_blank"
           rel="noopener noreferrer"
@@ -41,6 +43,7 @@
 
         <a
           class="card"
+          data-country="thailand"
           href="https://line.me/R/ti/p/@913dqslp?ts=03090234&oat_content=url"
           target="_blank"
           rel="noopener noreferrer"
@@ -51,6 +54,7 @@
 
         <a
           class="card"
+          data-country="philippines"
           href="https://line.me/R/ti/p/@448tfews?ts=03090233&oat_content=url"
           target="_blank"
           rel="noopener noreferrer"
@@ -73,6 +77,34 @@
           sales_name: sales,
         });
       }
+
+      const cards = document.querySelectorAll(".card");
+
+      cards.forEach((card) => {
+        card.addEventListener("click", () => {
+          if (!sales) {
+            return;
+          }
+
+          const country = card.dataset.country;
+
+          fetch(
+            "https://script.google.com/macros/s/AKfycbxOQ4w96E9rSnWJZFAv8pC-dOQeBZzzkbSMogmh7DMTLbQl_199uB_yx1tnVaxL4Jsc/exec",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                sales: sales,
+                country: country,
+              }),
+            }
+          ).catch(() => {
+            // Do not block navigation if the sheet logging request fails.
+          });
+        });
+      });
     </script>
   </body>
 </html>
