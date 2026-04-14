@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Turkers LINE 入口</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-XXXXXXX");
+    </script>
+  </head>
+  <body>
+    <main class="page">
+      <p id="sales" class="sales-banner" hidden></p>
+      <section class="grid" aria-label="LINE 官方帳號入口">
+        <a
+          class="card"
+          href="https://line.me/R/ti/p/@046hgxyf?oat_content=url&ts=03090234"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="前往越南 LINE 官方帳號"
+        >
+          <img src="./assets/vietnam.png" alt="越南問卷圖片" />
+        </a>
+
+        <a
+          class="card"
+          href="https://line.me/R/ti/p/@913dqslp?oat_content=url&ts=03090235"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="前往印尼 LINE 官方帳號"
+        >
+          <img src="./assets/indonesia.png" alt="印尼問卷圖片" />
+        </a>
+
+        <a
+          class="card"
+          href="https://line.me/R/ti/p/@913dqslp?ts=03090234&oat_content=url"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="前往泰國 LINE 官方帳號"
+        >
+          <img src="./assets/thailand.png" alt="泰國問卷圖片" />
+        </a>
+
+        <a
+          class="card"
+          href="https://line.me/R/ti/p/@448tfews?ts=03090233&oat_content=url"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="前往菲律賓 LINE 官方帳號"
+        >
+          <img src="./assets/philippines.png" alt="菲律賓問卷圖片" />
+        </a>
+      </section>
+    </main>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const sales = params.get("utm_content");
+      const salesElement = document.getElementById("sales");
+
+      if (sales) {
+        salesElement.hidden = false;
+        salesElement.textContent = "業務專員：" + sales;
+
+        gtag("event", "sales_visit", {
+          sales_name: sales,
+        });
+      }
+    </script>
+  </body>
+</html>
